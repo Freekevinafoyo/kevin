@@ -13,12 +13,14 @@ const links = document.querySelectorAll("nav a");
 
 links.forEach(link => {
   link.addEventListener("click", function (e) {
-    e.preventDefault();
+    const href = link.getAttribute("href");
 
-    const targetId = this.getAttribute("href");
-    const targetSection = document.querySelector(targetId);
+    if (!href || !href.startsWith("#")) return;
+
+    const targetSection = document.querySelector(href);
 
     if (targetSection) {
+      e.preventDefault();
       targetSection.scrollIntoView({
         behavior: "smooth"
       });
